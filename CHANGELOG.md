@@ -1,3 +1,9 @@
+## [1.0.0-dev.4](https://github.com/JacksonJones2003/jacksonjones-morphe-patches/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2026-10-08)
+
+### 🐛 Bug Fixes
+
+* **YouTube - Hide status bar in tabletop mode:** Use the space of the hidden status bar ([2038524](https://github.com/JacksonJones2003/jacksonjones-morphe-patches/commit/2038524470ad7ac095a433d43afa3711858b310a))
+
 ## [1.0.0-dev.3](https://github.com/JacksonJones2003/jacksonjones-morphe-patches/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2026-10-08)
 
 ### ✨ New Features
