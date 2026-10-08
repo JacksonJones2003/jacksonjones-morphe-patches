@@ -1,16 +1,14 @@
 package app.jacksonjones.extension.youtube.patches;
 
 import android.app.Activity;
-import android.app.Application;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.DisplayCutout;
-import android.view.View;
-import android.view.ViewParent;
 import android.view.WindowInsets;
+
+import app.jacksonjones.extension.youtube.shared.WindowInsetsHook;
 
 @SuppressWarnings("unused")
 public final class RemoveSideCutoutBarPatch {
@@ -20,8 +18,7 @@ public final class RemoveSideCutoutBarPatch {
     /**
      * Injection point.
      * <p>
-     * Called when the main activity is created. The insets listener is set when the activity is started,
-     * because getting the views any earlier creates the window before the activity has set its theme.
+     * Called when the main activity is created.
      */
     public static void initialize(Activity activity) {
         // Insets of a single type cannot be replaced before Android 11.
@@ -30,22 +27,7 @@ public final class RemoveSideCutoutBarPatch {
         }
 
         try {
-            activity.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-                public void onActivityStarted(Activity activity) {
-                    try {
-                        setInsetsListener(activity);
-                    } catch (Exception ex) {
-                        Log.e(TAG, "onActivityStarted failure", ex);
-                    }
-                }
-
-                public void onActivityCreated(Activity a, Bundle b) {}
-                public void onActivityResumed(Activity a) {}
-                public void onActivityPaused(Activity a) {}
-                public void onActivityStopped(Activity a) {}
-                public void onActivitySaveInstanceState(Activity a, Bundle b) {}
-                public void onActivityDestroyed(Activity a) {}
-            });
+            WindowInsetsHook.addModifier(activity, RemoveSideCutoutBarPatch::removeSideCutout);
         } catch (Exception ex) {
             Log.e(TAG, "initialize failure", ex);
         }
@@ -62,34 +44,6 @@ public final class RemoveSideCutoutBarPatch {
             safeInsets.left = 0;
             safeInsets.right = 0;
         }
-    }
-
-    /**
-     * The listener is set on the view below the decor view, so every view of the activity gets
-     * the changed insets, and the listeners the app sets on its own views are not replaced.
-     */
-    private static void setInsetsListener(Activity activity) {
-        View decorView = activity.getWindow().getDecorView();
-        View root = decorView.findViewById(android.R.id.content);
-        if (root == null) {
-            return;
-        }
-
-        ViewParent parent = root.getParent();
-        while (parent instanceof View && parent != decorView) {
-            root = (View) parent;
-            parent = root.getParent();
-        }
-
-        root.setOnApplyWindowInsetsListener((view, insets) -> {
-            try {
-                insets = removeSideCutout(insets);
-            } catch (Exception ex) {
-                Log.e(TAG, "removeSideCutout failure", ex);
-            }
-            return view.onApplyWindowInsets(insets);
-        });
-        root.requestApplyInsets();
     }
 
     /**

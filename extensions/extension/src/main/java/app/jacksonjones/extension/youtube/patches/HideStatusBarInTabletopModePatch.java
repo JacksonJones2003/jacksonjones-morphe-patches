@@ -2,6 +2,7 @@ package app.jacksonjones.extension.youtube.patches;
 
 import android.app.Activity;
 import android.app.Application;
+import android.graphics.Insets;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,8 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 
 import java.lang.ref.WeakReference;
+
+import app.jacksonjones.extension.youtube.shared.WindowInsetsHook;
 
 @SuppressWarnings("unused")
 public final class HideStatusBarInTabletopModePatch {
@@ -46,6 +49,8 @@ public final class HideStatusBarInTabletopModePatch {
         try {
             activityRef = new WeakReference<>(activity);
             statusBarHidden = false;
+
+            WindowInsetsHook.addModifier(activity, HideStatusBarInTabletopModePatch::removeStatusBarInset);
 
             activity.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
                 private boolean layoutListenerAdded;
@@ -146,6 +151,7 @@ public final class HideStatusBarInTabletopModePatch {
             return;
         }
 
+        boolean wasStatusBarHidden = statusBarHidden;
         if (tabletopMode) {
             statusBarHidden = true;
             controller.setSystemBarsBehavior(WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
@@ -158,6 +164,27 @@ public final class HideStatusBarInTabletopModePatch {
                 controller.show(WindowInsets.Type.statusBars());
             }
         }
+
+        if (wasStatusBarHidden != statusBarHidden) {
+            WindowInsetsHook.requestApplyInsets(activity);
+        }
+    }
+
+    /**
+     * The app lays out its views with the stable insets, which keep the space of the status bar
+     * while it is hidden, so the video and the tabletop controls do not use that space.
+     * The inset of the status bar is removed while it is hidden by this patch.
+     */
+    private static WindowInsets removeStatusBarInset(WindowInsets insets) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R || !statusBarHidden) {
+            return insets;
+        }
+
+        return new WindowInsets.Builder(insets)
+                .setInsets(WindowInsets.Type.statusBars(), Insets.NONE)
+                .setInsetsIgnoringVisibility(WindowInsets.Type.statusBars(), Insets.NONE)
+                .setVisible(WindowInsets.Type.statusBars(), false)
+                .build();
     }
 
     private static boolean isStatusBarVisible(View decorView) {
