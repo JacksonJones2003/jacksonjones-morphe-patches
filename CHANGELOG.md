@@ -1,3 +1,9 @@
+## [1.0.0-dev.3](https://github.com/JacksonJones2003/jacksonjones-morphe-patches/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2026-10-08)
+
+### ✨ New Features
+
+* **YouTube:** Add `Hide status bar in tabletop mode` patch ([c135a08](https://github.com/JacksonJones2003/jacksonjones-morphe-patches/commit/c135a08a32e168f9ae2162dac7bc1001488d835e))
+
 ## [1.0.0-dev.2](https://github.com/JacksonJones2003/jacksonjones-morphe-patches/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2026-10-08)
 
 ### 🐛 Bug Fixes

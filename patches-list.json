@@ -1,7 +1,41 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.0-dev.2",
+  "version": "1.0.0-dev.3",
   "patches": [
+    {
+      "name": "Hide status bar in tabletop mode",
+      "description": "Hides the status bar when a foldable device is half opened into tabletop mode, and shows it again when the device leaves tabletop mode.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.google.android.youtube",
+          "name": "YouTube",
+          "description": null,
+          "apkFileType": "APK_REQUIRED",
+          "appIconColor": "#FF0033",
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": true,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "21.38.123",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 29,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
     {
       "name": "Remove side cutout bar",
       "description": "Removes the black bar reserved for the camera cutout at the side of the screen in landscape. The space reserved for a cutout at the top in portrait is not changed.",
