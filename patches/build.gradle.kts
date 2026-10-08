@@ -1,14 +1,13 @@
-group = "app.template"
+group = "app.jacksonjones"
 
 patches {
-    // TODO: Update this section with your project details.
     about {
-        name = "UserXYZ Patches"
-        description = "Patches for apps I like"
-        source = "git@github.com:UserXYZ/morphe-patches.git"
-        author = "Awesome dev"
-        contact = "na"
-        website = "na"
+        name = "JacksonJones Patches"
+        description = "Patches by JacksonJones2003 for use with Morphe"
+        source = "git@github.com:JacksonJones2003/jacksonjones-morphe-patches.git"
+        author = "JacksonJones2003"
+        contact = "https://github.com/JacksonJones2003/jacksonjones-morphe-patches/issues"
+        website = "https://github.com/JacksonJones2003/jacksonjones-morphe-patches"
         license = "GPLv3"
     }
 }

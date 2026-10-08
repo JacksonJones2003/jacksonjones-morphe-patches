@@ -1,16 +1,14 @@
-# 👋🧩 Morphe Patches template
+# 🧩 JacksonJones Patches
 
-Template repository for Morphe Patches.
+Patches by JacksonJones2003 for use with Morphe.
 
 ## ❓ About
 
-Patches for apps I like.
-
-<!-- TODO: Update this about section with a brief introduction/summary about this repo and what it offers. -->
+Patches for YouTube, such as removing the black bar reserved for the camera cutout at the side of the screen in landscape.
 
 ### How to use these patches
 
-Click here to add these patches to Morphe: https://morphe.software/add-source?github=xyz-user/xyz-patches
+Click here to add these patches to Morphe: https://morphe.software/add-source?github=JacksonJones2003/jacksonjones-morphe-patches
 
 ## 🩹 Patches list
 
@@ -88,4 +86,4 @@ See the [Morphe documentation](https://github.com/MorpheApp/morphe-documentation
 
 ## 📜 License
 
-UserXYZ Patches are licensed under the [GNU General Public License v3.0](LICENSE)
+JacksonJones Patches are licensed under the [GNU General Public License v3.0](LICENSE)
