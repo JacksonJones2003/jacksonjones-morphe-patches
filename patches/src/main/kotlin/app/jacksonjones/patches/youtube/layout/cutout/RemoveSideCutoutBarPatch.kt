@@ -22,13 +22,14 @@ val removeSideCutoutBarPatch = bytecodePatch(
         // Insets dispatched to the views of the main activity.
         MainActivityOnCreateFingerprint.method.addInstruction(
             0,
-            "invoke-static { p0 }, $EXTENSION_CLASS->initialize(Landroid/app/Activity;)V"
+            // The register of 'this' is above v15 in this method, so the range format is needed.
+            "invoke-static/range { p0 .. p0 }, $EXTENSION_CLASS->initialize(Landroid/app/Activity;)V"
         )
 
         // Cutout safe insets the app reads from the root window insets.
         DisplayCutoutConstructorFingerprint.method.addInstruction(
             0,
-            "invoke-static { p1 }, $EXTENSION_CLASS->removeSideCutout(Landroid/graphics/Rect;)V"
+            "invoke-static/range { p1 .. p1 }, $EXTENSION_CLASS->removeSideCutout(Landroid/graphics/Rect;)V"
         )
     }
 }
