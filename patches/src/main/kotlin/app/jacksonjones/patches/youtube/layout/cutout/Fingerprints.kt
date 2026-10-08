@@ -1,15 +1,7 @@
 package app.jacksonjones.patches.youtube.layout.cutout
 
-import app.jacksonjones.patches.youtube.shared.Constants.YOUTUBE_MAIN_ACTIVITY_CLASS_TYPE
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.string
-
-internal object MainActivityOnCreateFingerprint : Fingerprint(
-    definingClass = YOUTUBE_MAIN_ACTIVITY_CLASS_TYPE,
-    name = "onCreate",
-    returnType = "V",
-    parameters = listOf("Landroid/os/Bundle;")
-)
 
 /**
  * The app's own display cutout class, which holds the cutout safe insets the layouts

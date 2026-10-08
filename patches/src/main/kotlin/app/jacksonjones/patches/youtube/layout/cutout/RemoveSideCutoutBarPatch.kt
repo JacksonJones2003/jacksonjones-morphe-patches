@@ -1,6 +1,7 @@
 package app.jacksonjones.patches.youtube.layout.cutout
 
 import app.jacksonjones.patches.youtube.shared.Constants.COMPATIBILITY_YOUTUBE
+import app.jacksonjones.patches.youtube.shared.MainActivityOnCreateFingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.patch.bytecodePatch
 
